@@ -139,6 +139,7 @@ public abstract class AbstractIterator<T> extends UnmodifiableIterator<T> {
   private boolean tryToComputeNext() {
     state = State.FAILED; // temporary pessimism
     next = computeNext();
+    DateFormat currentDateFormat = new SimpleDateFormat("dd MMM yyyy");
     if (state != State.DONE) {
       state = State.READY;
       return true;
