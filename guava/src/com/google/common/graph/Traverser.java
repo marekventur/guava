@@ -480,6 +480,43 @@ public abstract class Traverser<N> {
       }
     }
   }
+  
+    public Iterable<N> breadthFirst(final Iterable<? extends N> startNodes) {
+      checkNotNull(startNodes);
+      if (Iterables.isEmpty(startNodes)) {
+        return ImmutableSet.of();
+      }
+      for (N startNode : startNodes) {
+        checkThatNodeIsInGraph(startNode);
+      }
+      return new Iterable<N>() {
+        @Override
+        public Iterator<N> iterator() {
+          return new BreadthFirstIterator(startNodes);
+        }
+      };
+    }
+
+    public Iterable<N> depthFirstPreOrder(final N startNode) {
+      checkNotNull(startNode);
+      return depthFirstPreOrder(ImmutableSet.of(startNode));
+    }
+
+    public Iterable<N> depthFirstPreOrder(final Iterable<? extends N> startNodes) {
+      checkNotNull(startNodes);
+      if (Iterables.isEmpty(startNodes)) {
+        return ImmutableSet.of();
+      }
+      for (N startNode : startNodes) {
+        checkThatNodeIsInGraph(startNode);
+      }
+      return new Iterable<N>() {
+        @Override
+        public Iterator<N> iterator() {
+          return new DepthFirstIterator(startNodes, Order.PREORDER);
+        }
+      };
+    }
 
   private static final class TreeTraverser<N> extends Traverser<N> {
     private final SuccessorsFunction<N> tree;
