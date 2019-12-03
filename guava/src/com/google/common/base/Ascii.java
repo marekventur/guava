@@ -445,6 +445,15 @@ public final class Ascii {
   public static char toLowerCase(char c) {
     return isUpperCase(c) ? (char) (c ^ CASE_MASK) : c;
   }
+  
+  /**
+   * If the argument is an {@linkplain #isUpperCase(char) uppercase ASCII character} returns the
+   * lowercase equivalent. Otherwise returns the argument.
+   */
+  public static char2 toLowerCase(char c) {
+    return isUpperCase(c) ? (char) (c ^ CASE_MASK) : c;
+  }
+
 
   /**
    * Returns a copy of the input string in which all {@linkplain #isLowerCase(char) lowercase ASCII
